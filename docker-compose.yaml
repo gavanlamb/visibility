@@ -1,0 +1,99 @@
+﻿version: '3.9'
+services:
+  grafana:
+    image: grafana/grafana:10.0.5-ubuntu
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - grafana_home:/usr/share/grafana
+      - grafana_provisioning:/etc/grafana/provisioning
+      - grafana_plugins:/var/lib/grafana/plugins
+    networks:
+      - infrastructure
+    configs:
+      - source: grafana_config
+        target: /etc/grafana/grafana.ini
+      - source: grafana_datasource_loki
+        target: /etc/grafana/provisioning/datasources/loki.yml
+      - source: grafana_datasource_prometheus
+        target: /etc/grafana/provisioning/datasources/prometheus.yml
+      - source: grafana_datasource_tempo
+        target: /etc/grafana/provisioning/datasources/tempo.yml
+    environment:
+      GF_INSTALL_PLUGINS: https://grafana.com/api/plugins/novatec-sdg-panel/versions/4.0.3/download;novatec-sdg-panel
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - "node.role == manager"
+      rollback_config:
+        parallelism: 0
+        failure_action: continue
+        order: stop-first
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+        order: stop-first
+      labels:
+        prometheus.job: grafana
+        prometheus.port: 3000
+        prometheus.path: /metrics
+        traefik.enable: 'true'
+        traefik.http.routers.grafana.rule: Host(`grafana.gavanlamb.com`)
+        traefik.http.routers.grafana.entrypoints: websecure
+        traefik.http.routers.grafana.tls.certresolver: letsencrypt
+        traefik.http.routers.grafana.service: grafana
+        traefik.http.services.grafana.loadBalancer.server.port: 3000
+    logging:
+      driver: loki
+      options:
+        loki-url: http://192.168.50.19:3100/loki/api/v1/push
+        loki-retries: 5
+        loki-batch-size: 20
+        loki-tenant-id: 1
+        loki-external-labels: "job=grafana"
+
+configs:
+  grafana_config:
+    file: config/grafana.ini
+    name: grafana_config
+  grafana_datasource_loki:
+    file: config/grafana.datasource.loki.yml
+    name: grafana_datasource_loki
+  grafana_datasource_prometheus:
+    file: config/grafana.datasource.prometheus.yml
+    name: grafana_datasource_prometheus
+  grafana_datasource_tempo:
+    file: config/grafana.datasource.tempo.yml
+    name: grafana_datasource_tempo
+
+volumes:
+  grafana_data:
+    name: grafana_data
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      device: ":/share/docker/grafana/data"
+  grafana_home:
+    name: grafana_home
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      device: ":/share/docker/grafana/home"
+  grafana_provisioning:
+    name: grafana_provisioning
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      device: ":/share/docker/grafana/provisioning"
+  grafana_plugins:
+    name: grafana_plugins
+    driver_opts:
+      type: "nfs"
+      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      device: ":/share/docker/grafana/plugins"
+
+networks:
+  infrastructure:
+    name: infrastructure
+    external: true
