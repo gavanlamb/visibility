@@ -45,12 +45,7 @@ services:
         traefik.http.routers.grafana.service: grafana
         traefik.http.services.grafana.loadBalancer.server.port: 3000
     logging:
-      driver: loki
       options:
-        loki-url: http://192.168.50.19:3100/loki/api/v1/push
-        loki-retries: 5
-        loki-batch-size: 20
-        loki-tenant-id: 1
         loki-external-labels: "job=grafana"
 
 configs:
