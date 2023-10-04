@@ -67,7 +67,7 @@ services:
         order: stop-first
     logging:
       options:
-        loki-external-labels: "job=grafana-renderer"
+        loki-external-labels: "job=grafana_renderer"
 
 configs:
   grafana_config:
