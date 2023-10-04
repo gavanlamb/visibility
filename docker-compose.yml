@@ -19,7 +19,7 @@ services:
       - source: grafana_datasource_tempo
         target: /etc/grafana/provisioning/datasources/tempo.yml
     environment:
-      GF_INSTALL_PLUGINS: https://grafana.com/api/plugins/novatec-sdg-panel/versions/4.0.3/download;novatec-sdg-panel
+      GF_INSTALL_PLUGINS: https://grafana.com/api/plugins/novatec-sdg-panel/versions/4.0.3/download;novatec-sdg-panel,grafana-image-renderer
     deploy:
       replicas: 1
       placement:
