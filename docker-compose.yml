@@ -20,6 +20,8 @@ services:
         target: /etc/grafana/provisioning/datasources/tempo.yml
     environment:
       GF_INSTALL_PLUGINS: https://grafana.com/api/plugins/novatec-sdg-panel/versions/4.0.3/download;novatec-sdg-panel,grafana-image-renderer
+      GF_RENDERING_SERVER_URL: http://renderer:8081/render
+      GF_RENDERING_CALLBACK_URL: http://grafana:3000/
     deploy:
       replicas: 1
       placement:
