@@ -96,7 +96,7 @@ configs:
     file: config/grafana.datasource.tempo.yml
     name: grafana_datasource_tempo
   grafana_renderer_config:
-    file: config/grafana.datasource.tempo.yml
+    file: config/renderer.json
     name: grafana_renderer_config
 
 volumes:
