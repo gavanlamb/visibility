@@ -1,6 +1,6 @@
 ﻿{
   "service": {
-    "host": "localhost",
+    "host": null,
     "port": 8081,
     "metrics": {
       "enabled": true,
@@ -13,27 +13,35 @@
         "json": true,
         "colorize": false
       }
+    },
+    "security": {
+      "authToken": "-"
     }
   },
   "rendering": {
-    "mode": "default",
-    "verboseLogging": true,
-    "args": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage",
-      "--disable-accelerated-2d-canvas",
-      "--disable-gpu",
-      "--window-size=1280x758"
-    ],
-    "ignoresHttpsErrors": true,
-    "timezone": "Australia/Sydney",
+    "chromeBin": null,
+    "args": ["--no-sandbox", "--disable-gpu"],
+    "ignoresHttpsErrors": false,
+    "timezone": null,
+    "acceptLanguage": null,
     "width": 1000,
-    "maxWidth": 3080,
     "height": 500,
+    "deviceScaleFactor": 1,
+    "maxWidth": 3080,
     "maxHeight": 3000,
-    "deviceScaleFactor": 4,
-    "maxDeviceScaleFactor": 8,
-    "pageZoomLevel": 1
+    "maxDeviceScaleFactor": 4,
+    "pageZoomLevel": 1,
+    "headed": false,
+    "mode": "default",
+    "emulateNetworkConditions": false,
+    "clustering": {
+      "monitor": false,
+      "mode": "browser",
+      "maxConcurrency": 5,
+      "timeout": 30
+    },
+    "verboseLogging": false,
+    "dumpio": false,
+    "timingMetrics": false
   }
 }
