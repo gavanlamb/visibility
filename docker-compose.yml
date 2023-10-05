@@ -19,6 +19,8 @@ services:
       - source: grafana_datasource_tempo
         target: /etc/grafana/provisioning/datasources/tempo.yml
     environment:
+      GF_EXTERNAL_IMAGE_STORAGE_S3_ACCESS_KEY: ${GRAFANA_ACCESS_KEY}
+      GF_EXTERNAL_IMAGE_STORAGE_S3_SECRET_KEY: ${GRAFANA_SECRET_KEY}
       GF_INSTALL_PLUGINS: https://grafana.com/api/plugins/novatec-sdg-panel/versions/4.0.3/download;novatec-sdg-panel,grafana-image-renderer
       GF_RENDERING_RENDERER_TOKEN: ${GRAFANA_RENDERER_AUTH_TOKEN}
     deploy:
