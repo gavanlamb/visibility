@@ -55,11 +55,10 @@ services:
     image: grafana/grafana-image-renderer:latest
     networks:
       - infrastructure
-    configs:
-      - source: grafana_renderer_config
-        target: /usr/src/app/config.json
     environment:
       AUTH_TOKEN: ${GRAFANA_RENDERER_AUTH_TOKEN}
+      ENABLE_METRICS: 'true'
+      LOG_LEVEL: debug
     deploy:
       replicas: 1
       placement:
@@ -95,9 +94,6 @@ configs:
   grafana_datasource_tempo:
     file: config/grafana.datasource.tempo.yml
     name: grafana_datasource_tempo
-  grafana_renderer_config:
-    file: config/renderer.json
-    name: grafana_renderer_config
 
 volumes:
   grafana_data:
