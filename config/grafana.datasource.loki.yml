@@ -17,4 +17,4 @@ datasources:
           urlDisplayLabel: 'View Trace'
         - matcherRegex: "traceID=(\\w+)"
           name: TraceID
-          url: 'http://localhost:3200/api/traces/$${__value.raw}'
+          url: 'http://tempo:3200/api/traces/$${__value.raw}'
