@@ -8,13 +8,10 @@ datasources:
     url: http://loki:3100
     basicAuth: false
     jsonData:
-      maxLines: 5000
+      maxLines: 1000
       derivedFields:
-        - datasourceUid: tempo
-          matcherRegex: "traceID=(\\w+)"
-          name: TraceID
+        - name: TraceID
+          datasourceUid: tempo
+          matcherRegex: '(?:"traceID"\:")(\w*)(?:")'
           url: '$${__value.raw}'
           urlDisplayLabel: 'View Trace'
-        - matcherRegex: "traceID=(\\w+)"
-          name: TraceID
-          url: 'http://tempo:3200/api/traces/$${__value.raw}'
