@@ -10,8 +10,8 @@ datasources:
     jsonData:
       tracesToLogsV2:
         datasourceUid: 'loki'
-        spanStartTimeShift: '30m'
-        spanEndTimeShift: '-30m'
+        spanStartTimeShift: '1h'
+        spanEndTimeShift: '-1h'
         tags: 
           - key: service.name
             value: job
@@ -19,14 +19,16 @@ datasources:
         filterBySpanID: false
         customQuery: true
         query: '{$${__tags}} | json | traceID="$${__trace.traceId}"'
-#      tracesToMetrics:
-#        datasourceUid: 'prometheus'
-#        spanStartTimeShift: '1h'
-#        spanEndTimeShift: '-1h'
-#        tags: [{ key: 'service.name', value: 'service' }, { key: 'job' }]
-#        queries:
-#          - name: 'Metrics query'
-#            query: 'sum(rate(traces_spanmetrics_latency_bucket{$$__tags}[5m]))'
+      tracesToMetrics:
+        datasourceUid: 'prometheus'
+        spanStartTimeShift: '1h'
+        spanEndTimeShift: '-1h'
+        tags:
+          - key: service.name
+            value: job
+        queries:
+          - name: 'View Metrics'
+            query: 'sum(rate(traces_spanmetrics_latency_bucket{$$__tags}[5m]))'
       serviceMap:
         datasourceUid: 'prometheus'
       nodeGraph:
