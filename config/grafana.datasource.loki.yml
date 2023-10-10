@@ -14,4 +14,4 @@ datasources:
           datasourceUid: tempo
           matcherRegex: '(?:"traceID"\:")(\w*)(?:")'
           url: '$${__value.raw}'
-          urlDisplayLabel: 'View Trace'
+          urlDisplayLabel: 'View Traces'
