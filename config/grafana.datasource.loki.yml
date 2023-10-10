@@ -10,8 +10,13 @@ datasources:
     jsonData:
       maxLines: 1000
       derivedFields:
-        - name: TraceID
+        - name: traceID
           datasourceUid: tempo
           matcherRegex: '(?:"traceID"\:")(\w*)(?:")'
           url: '$${__value.raw}'
-          urlDisplayLabel: 'View Traces'
+          urlDisplayLabel: 'Traces'
+        - name: traceID
+          datasourceUid: prometheus
+          matcherRegex: '(?:"traceID"\:")(\w*)(?:")'
+          url: '$${__value.raw}'
+          urlDisplayLabel: 'Metrics'
