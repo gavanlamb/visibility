@@ -8,7 +8,7 @@ services:
       - grafana_provisioning:/etc/grafana/provisioning
       - grafana_plugins:/var/lib/grafana/plugins
     networks:
-      - infrastructure
+      - services
     configs:
       - source: grafana_config
         target: /etc/grafana/grafana.ini
@@ -121,6 +121,6 @@ volumes:
       device: ":/share/docker/grafana/plugins"
 
 networks:
-  infrastructure:
-    name: infrastructure
+  services:
+    name: services
     external: true
