@@ -53,7 +53,7 @@ services:
   grafana_renderer:
     image: grafana/grafana-image-renderer:latest
     networks:
-      - infrastructure
+      - services
     environment:
       AUTH_TOKEN: ${GRAFANA_RENDERER_AUTH_TOKEN}
       ENABLE_METRICS: 'true'
