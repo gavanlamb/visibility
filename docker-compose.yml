@@ -50,7 +50,7 @@ services:
       options:
         loki-external-labels: "job=grafana"
         
-  grafana_renderer:
+  grafana-renderer:
     image: grafana/grafana-image-renderer:latest
     networks:
       - services
