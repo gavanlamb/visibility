@@ -99,25 +99,25 @@ volumes:
     name: grafana_data
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      o: "nfsvers=4,addr=192.168.50.31,rw,noatime,rsize=8192,wsize=8192,tcp"
       device: ":/share/docker/grafana/data"
   grafana_home:
     name: grafana_home
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      o: "nfsvers=4,addr=192.168.50.31,rw,noatime,rsize=8192,wsize=8192,tcp"
       device: ":/share/docker/grafana/home"
   grafana_provisioning:
     name: grafana_provisioning
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      o: "nfsvers=4,addr=192.168.50.31,rw,noatime,rsize=8192,wsize=8192,tcp"
       device: ":/share/docker/grafana/provisioning"
   grafana_plugins:
     name: grafana_plugins
     driver_opts:
       type: "nfs"
-      o: "addr=192.168.50.19,rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14"
+      o: "nfsvers=4,addr=192.168.50.31,rw,noatime,rsize=8192,wsize=8192,tcp"
       device: ":/share/docker/grafana/plugins"
 
 networks:
