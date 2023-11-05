@@ -4,7 +4,7 @@ datasources:
   - name: Tempo
     type: tempo
     uid: tempo
-    url: http://tempo:3200
+    url: http://tempo:4100
     access: proxy
     basicAuth: false
     jsonData:
