@@ -73,7 +73,7 @@ services:
         order: stop-first
       labels:
         prometheus.job: grafana_renderer
-        prometheus.port: 8081
+        prometheus.port: 4300
         prometheus.path: /metrics
     logging:
       options:
