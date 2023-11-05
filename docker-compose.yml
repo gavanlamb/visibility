@@ -37,14 +37,14 @@ services:
         order: stop-first
       labels:
         prometheus.job: grafana
-        prometheus.port: 3000
+        prometheus.port: 4200
         prometheus.path: /metrics
         traefik.enable: 'true'
         traefik.http.routers.grafana.rule: Host(`grafana.gavanlamb.com`)
         traefik.http.routers.grafana.entrypoints: websecure
         traefik.http.routers.grafana.tls.certresolver: letsencrypt
         traefik.http.routers.grafana.service: grafana
-        traefik.http.services.grafana.loadBalancer.server.port: 3000
+        traefik.http.services.grafana.loadBalancer.server.port: 4200
     logging:
       options:
         loki-external-labels: "job=grafana"
