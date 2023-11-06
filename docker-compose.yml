@@ -57,8 +57,7 @@ services:
       AUTH_TOKEN: ${GRAFANA_RENDERER_AUTH_TOKEN}
       ENABLE_METRICS: 'true'
       LOG_LEVEL: debug
-    command:
-      - ' --port=4300'
+      HTTP_PORT: 4300
     deploy:
       replicas: 1
       placement:
