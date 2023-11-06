@@ -58,7 +58,7 @@ services:
       ENABLE_METRICS: 'true'
       LOG_LEVEL: debug
     command:
-      - ' -port=4300'
+      - ' --port=4300'
     deploy:
       replicas: 1
       placement:
